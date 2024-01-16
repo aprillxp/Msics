@@ -2,6 +2,7 @@
 
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types/types";
+import Image from "next/image";
 
 interface MediaItemProps {
   data: Song;
@@ -30,8 +31,32 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         rounded-md
       "
     >
-      <div>
-        
+      <div
+        className="
+          relative
+          rounded-md
+          min-h-[48px]
+          min-w-[48px]
+          overflow-hidden
+        "
+      >
+        <Image
+          fill
+          src={imageUrl || "/images/liked.png"}
+          alt="Media Item"
+          className="object-cover"
+        />
+      </div>
+      <div
+        className="
+          flex
+          flex-col
+          gap-y-1
+          overflow-hidden
+        "
+      >
+        <p className="text-white truncate font-bold">{data.title}</p>
+        <p className="text-neutral-400 text-sm truncate">{data.author}</p>
       </div>
     </div>
   );
