@@ -25,6 +25,15 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
           <LikeButton songId={song.id} />
         </div>
       </div>
+
+      <div
+        className="
+          flex
+          md:hidden
+          col-auto
+          
+        "
+      ></div>
     </div>
   );
 };
