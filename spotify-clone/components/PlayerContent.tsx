@@ -4,7 +4,7 @@ import { Song } from "@/types/types";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import usePlayer from "@/hooks/usePlayer";
 
@@ -63,7 +63,33 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       setIsPlaying(false);
       onPlayNext();
     },
+    onpause: () => setIsPlaying(false),
+    format: ["mp3"],
   });
+
+  useEffect(() => {
+    sound?.play();
+
+    return () => {
+      sound?.unload();
+    };
+  }, [sound]);
+
+  const handlePLay = () => {
+    if (!isPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  };
+
+  const toggleMute = () => {
+    if (volume === 0) {
+      setVolume(1);
+    } else {
+      setVolume(0);
+    }
+  };
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
@@ -92,7 +118,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         "
       >
         <div
-          onClick={() => {}}
+          onClick={handlePLay}
           className="
             h-10
             w-10
@@ -132,7 +158,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
           "
         />
         <div
-          onClick={() => {}}
+          onClick={handlePLay}
           className="
             flex
             items-center
@@ -161,8 +187,12 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
-          <VolumeIcon onClick={() => {}} className="cursor-pointer" size={30} />
-          <Slider />
+          <VolumeIcon
+            onClick={toggleMute}
+            className="cursor-pointer"
+            size={30}
+          />
+          <Slider value={volume} onChange={(value) => setVolume(value)} />
         </div>
       </div>
     </div>
