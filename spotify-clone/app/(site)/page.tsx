@@ -3,10 +3,10 @@ import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 import PageContent from "./components/PageContent";
 
-export const revalidate = 0
+export const revalidate = 0;
 
 export default async function Home() {
-  const songs = await getSongs()
+  const songs = await getSongs();
 
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
@@ -28,7 +28,7 @@ export default async function Home() {
         </div>
         <div>
           {/* {songs.map((song) => <div>{song.title}</div>)} */}
-          <PageContent songs={songs}/>
+          <PageContent songs={songs} />
         </div>
       </div>
     </div>
