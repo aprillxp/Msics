@@ -1,12 +1,12 @@
 import Stripe from "stripe";
 
 export interface Song {
-  id: string
-  user_id: string
-  author: string
-  title: string
-  song_path: string
-  image_path: string
+  id: string;
+  user_id: string;
+  author: string;
+  title: string;
+  song_path: string;
+  image_path: string;
 }
 
 export interface UserDetails {
@@ -31,7 +31,7 @@ export interface Product {
 export interface Price {
   id: string;
   product_id?: string;
-  active?: string;
+  active?: boolean;
   description?: string;
   unit_amount?: number;
   currency?: string;
