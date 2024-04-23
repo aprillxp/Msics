@@ -170,4 +170,8 @@ const manageSubscriptionStatusChange = async (
         ? toDateTime(subscription.trial_end).toISOString()
         : null,
     };
+
+  const { error } = await supabaseAdmin
+    .from("subscriptions")
+    .upsert([subscriptionData]);
 };
