@@ -174,4 +174,24 @@ const manageSubscriptionStatusChange = async (
   const { error } = await supabaseAdmin
     .from("subscriptions")
     .upsert([subscriptionData]);
+
+  if (error) throw error;
+
+  console.log(
+    `Inserted / Updated subscription [${subscription.id} for ${uuid}]`
+  );
+
+  if (createAction && subscription.default_payment_method && uuid) {
+    await copyBillingDetailsToCustomers(
+      uuid,
+      subscription.default_payment_method as Stripe.PaymentMethod
+    );
+  }
+};
+
+export {
+  upsertProductRecord,
+  upsertPriceRecord,
+  createOrRetriveCustomer,
+  manageSubscriptionStatusChange,
 };
